@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rufino Lab · Alitas y boneless con fórmulas · Trujillo</title>
+<meta name="description" content="Rufino Lab: alitas y boneless bañados en la fórmula que elijas. Arma tu pedido con precios de la carta y mándalo por WhatsApp. Borgoño 396, Trujillo.">
+<meta name="theme-color" content="#E10A14">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Anton";src:url(assets/fonts/anton-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Archivo";src:url(assets/fonts/archivo-400.woff2) format("woff2");font-weight:400 800;font-display:swap}
+:root{
+  /* muestreados de su carta impresa y la bolsa */
+  --red:#E10A14; --red-d:#B3070F; --mustard:#F6C31C; --ink:#151515; --paper:#EFEEEC; --white:#fff;
+  --sauce:#6E2412;
+  --spring:linear(0, .009, .035 2.1%, .141, .281 6.7%, .723 12.9%, .938 16.7%, 1.017, 1.077, 1.121, 1.149 24.3%, 1.159, 1.163, 1.161, 1.154 29.9%, 1.129 32.8%, 1.051 39.6%, 1.017 43.1%, .991, .977 51%, .974 53.8%, .975 57.1%, .997 69.8%, 1.003 76.9%, 1);
+  --soft:linear(0, .06 2.2%, .24 5%, .7 11.4%, .93 16.3%, 1.03 20.9%, 1.06 25%, 1.04 30.5%, 1 40%, .995 50%, 1);
+  --display:"Anton",Impact,"Arial Narrow",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+html,body{overflow-x:clip}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+body{font-family:"Archivo",system-ui,sans-serif;color:var(--ink);background:var(--paper);font-size:16px;line-height:1.4}
+.tap{transition:transform .5s var(--spring)} .tap:active{transform:scale(.94);transition-duration:.1s}
+.halftone{background:radial-gradient(rgba(225,10,20,.12) 1.1px,transparent 1.6px) 0 0/9px 9px,var(--paper)}
+
+/* cuadros rojo/blanco: el borde de su bolsa, su fachada y su carta → corte entre secciones */
+.checker{height:22px;background:conic-gradient(var(--red) 25%,#fff 0 50%,var(--red) 0 75%,#fff 0) 0 0/22px 22px}
+.checker.sm{height:14px;background-size:14px 14px}
+
+/* ---------- cabecera: el letrero rojo con el logo ---------- */
+.top{background:var(--red);color:#fff;padding:18px 16px 14px;text-align:center;position:relative}
+.top .logo{width:min(250px,58vw);height:auto;display:block;margin:0 auto}
+.top p{font-weight:800;letter-spacing:.06em;font-size:12px;text-transform:uppercase;margin-top:6px;opacity:.95}
+.top p span{color:var(--mustard)}
+
+/* ---------- el laboratorio ---------- */
+.lab{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:0}
+.stagewrap{position:sticky;top:0;z-index:5;background:var(--paper);padding:8px 10px 0;margin:0 -0px}
+.stage{position:relative;max-width:min(620px,calc(40svh * 1.667));margin:0 auto}
+.stage svg{display:block;width:100%;height:auto;max-height:40svh;margin:0 auto}
+.formulatag{background:var(--red);color:#fff;padding:0 14px 10px;margin-top:-1px;min-height:64px;box-shadow:0 10px 14px -10px rgba(0,0,0,.45);border-radius:0 0 14px 14px}
+.formulatag .k{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mustard)}
+.formulatag .n{display:inline-block;background:var(--ink);color:#fff;font-family:var(--display);font-size:clamp(20px,5.4vw,34px);line-height:1;padding:5px 9px 4px;margin-top:3px;text-transform:uppercase}
+.formulatag .d{font-size:12.5px;line-height:1.3;margin-top:5px;max-width:46ch;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.formulatag .heat{display:inline-flex;gap:3px;margin-left:8px;vertical-align:middle}
+.formulatag .heat svg{background:#fff;border-radius:50%}
+.pop{animation:pop .6s var(--spring)} @keyframes pop{0%{transform:scale(.8)}100%{transform:scale(1)}}
+
+.panel{padding:6px 16px 120px}
+.step{margin-top:22px}
+.step h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,8vw,46px);line-height:.95;color:var(--red);text-transform:uppercase}
+.step h2 small{display:block;font-family:"Archivo";font-size:13px;font-weight:700;color:var(--ink);text-transform:none;letter-spacing:0;margin-top:6px}
+
+/* selector Alitas / Boneless */
+.seg{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:3px;margin-top:12px;overflow:hidden}
+.seg::before{content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:var(--red);border-radius:999px;transition:transform .55s var(--soft)}
+.seg[data-v="boneless"]::before{transform:translateX(100%)}
+.seg button{position:relative;z-index:1;font-family:var(--display);font-size:20px;text-transform:uppercase;padding:8px 22px;min-height:44px;transition:color .3s}
+.seg button[aria-pressed="true"]{color:#fff}
+
+/* filas de la carta */
+.rows{margin-top:12px;border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 6px;border-bottom:1px dashed rgba(0,0,0,.25);min-height:56px;position:relative;transition:background-color .3s}
+.row .q{font-family:var(--display);font-size:30px;line-height:1;min-width:2ch}
+.row .what{font-weight:700;font-size:14px;line-height:1.2}
+.row .what em{display:block;font-style:normal;font-weight:500;font-size:12.5px;color:#555}
+.row .fries{display:flex;gap:3px}
+.row .fries svg{height:20px;width:auto}
+.row .p{font-weight:800;font-size:19px;white-space:nowrap}
+.row[aria-checked="true"]{background:#fff}
+.row[aria-checked="true"]::before{content:"";position:absolute;left:-8px;top:8px;bottom:8px;width:5px;background:var(--red);border-radius:3px;animation:pop .5s var(--spring)}
+
+/* espacios para fórmulas */
+.slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.slot{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 12px 6px 6px;border:2px dashed rgba(0,0,0,.35);border-radius:12px;background:transparent;font-size:13px;font-weight:700;transition:border-color .3s,background-color .3s}
+.slot i{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid rgba(0,0,0,.2);flex:none;transition:background-color .4s}
+.slot[data-active="true"]{border-color:var(--red);border-style:solid;background:#fff}
+.slot.filled{border-style:solid;border-color:var(--ink)}
+.slot small{display:block;font-weight:600;font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.04em}
+
+/* estante de fórmulas, como su carta: etiqueta negra + franja amarilla / roja */
+.shelf{display:grid;grid-template-columns:28px 1fr;gap:10px;margin-top:14px}
+.shelf .side{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--display);font-size:16px;text-transform:uppercase;text-align:center;padding:8px 0;border-radius:3px}
+.shelf.mild .side{background:var(--mustard);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.15)}
+.shelf.hot .side{background:var(--red);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+.chip{display:flex;align-items:center;gap:7px;background:var(--ink);color:#fff;font-family:var(--display);font-size:17px;text-transform:uppercase;padding:8px 11px 7px;min-height:44px;border-radius:3px;position:relative;transition:transform .5s var(--spring),background-color .3s,box-shadow .3s}
+.chip .dot{width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px rgba(255,255,255,.85);flex:none}
+.chip .fl{display:flex;gap:2px}
+.chip:active{transform:scale(.93);transition-duration:.1s}
+.chip.on{background:var(--red)}
+.chip[disabled]{opacity:.38;cursor:not-allowed}
+.chip[disabled]::after{content:"agotado";font-family:"Archivo";font-size:10px;font-weight:800;letter-spacing:.05em;margin-left:2px;text-transform:uppercase}
+.shelf.hot{position:relative;padding:12px 10px 12px 0;outline:2px dashed var(--red);outline-offset:0;border-radius:10px}
+.spicezone{font-family:var(--display);color:var(--red);font-size:15px;text-transform:uppercase;margin:16px 0 -4px 2px;display:flex;align-items:center;gap:6px}
+
+.addbtn{margin-top:18px;width:100%;min-height:56px;border-radius:14px;background:var(--red);color:#fff;font-family:var(--display);font-size:22px;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 0 var(--red-d)}
+.addbtn[aria-disabled="true"]{background:#bdb9b5;box-shadow:0 4px 0 #9a9692}
+.hint{font-size:12.5px;color:#555;margin-top:8px;text-align:center;min-height:1.3em}
+.bad{animation:shake .4s} @keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* ---------- promos ---------- */
+.promos{background:var(--red);color:#fff;padding:34px 16px 40px}
+.promos .in{max-width:1240px;margin:0 auto}
+.promos h2{font-family:var(--display);font-weight:400;font-size:clamp(40px,11vw,76px);line-height:.9;text-transform:uppercase}
+.promos h2 span{color:var(--mustard)}
+.plist{display:grid;gap:16px;margin-top:20px}
+.promo{background:#fff;color:var(--ink);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:38% 1fr;text-align:left;width:100%;box-shadow:0 6px 0 var(--red-d)}
+.promo img{width:100%;height:100%;object-fit:cover;display:block;min-height:170px}
+.promo .b{padding:14px 14px 14px}
+.promo .t{font-family:var(--display);font-size:30px;line-height:.95;text-transform:uppercase;color:var(--red)}
+.promo .pr{display:inline-block;background:var(--mustard);font-family:var(--display);font-size:30px;line-height:1;padding:3px 8px 2px;margin-top:6px;color:var(--red-d)}
+.promo .pr small{font-size:16px}
+.promo ul{list-style:none;font-size:13.5px;margin-top:8px;line-height:1.35}
+.promo ul li::before{content:"+ ";font-weight:800;color:var(--red)}
+.promo .note{font-size:11.5px;color:#666;margin-top:6px}
+.promo .go{display:inline-flex;margin-top:10px;font-weight:800;font-size:14px;color:var(--red);align-items:center;gap:6px}
+.hallo{display:grid;gap:8px;margin-top:10px}
+.hallo button{display:flex;justify-content:space-between;gap:10px;text-align:left;background:var(--paper);border-radius:10px;padding:10px 12px;font-size:13px;min-height:44px}
+.hallo b{font-family:var(--display);font-weight:400;font-size:20px;color:var(--red);white-space:nowrap}
+
+/* ---------- pie: su letrero WINGS / FRIES / FLAVOR / REPEAT ---------- */
+.foot{padding:34px 16px 130px}
+.foot .in{max-width:1240px;margin:0 auto;display:grid;gap:26px}
+.sign{border:6px solid var(--red);padding:10px;background:#fff;max-width:420px;width:100%;margin:0 auto;box-shadow:10px 10px 0 var(--red)}
+.sign div{border:3px solid var(--red);padding:12px 10px;text-align:center;color:var(--red);font-family:var(--display);text-transform:uppercase;line-height:.92}
+.sign .w{font-size:clamp(58px,17vw,96px)}
+.sign .f{font-size:clamp(34px,10vw,56px);-webkit-text-stroke:2px var(--red);color:#fff;letter-spacing:.06em}
+.sign .fl,.sign .r{font-size:clamp(48px,14vw,80px)}
+.locs{display:grid;gap:14px}
+.loc{background:#fff;border-radius:14px;padding:16px;border-left:6px solid var(--red)}
+.loc h3{font-family:var(--display);font-weight:400;font-size:34px;text-transform:uppercase;line-height:1}
+.loc p{margin-top:4px;font-size:15px}
+.loc a{color:var(--red);font-weight:800;text-decoration:none;display:inline-flex;min-height:44px;align-items:center;margin-right:16px}
+.foot .meta{font-size:14px}
+.foot .meta b{font-family:var(--display);font-weight:400;font-size:22px;text-transform:uppercase;display:block;color:var(--red)}
+.foot .bolsa{width:100%;max-width:300px;border-radius:14px;display:block}
+
+/* ---------- barra y hoja de pedido ---------- */
+.bar{position:fixed;left:0;right:0;bottom:max(12px,env(safe-area-inset-bottom));margin:auto;width:max-content;max-width:calc(100% - 24px);transform:translateY(160%);transition:transform .6s var(--soft);z-index:30}
+.bar.show{transform:none}
+.bar button{display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border-radius:999px;padding:8px 8px 8px 16px;min-height:56px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.bar .cnt{background:var(--red);border-radius:999px;min-width:26px;height:26px;display:grid;place-items:center;font-weight:800;font-size:14px}
+.bar .tot{font-weight:800;font-size:17px}
+.bar .cta{background:var(--red);border-radius:999px;padding:10px 16px;font-family:var(--display);font-size:18px;text-transform:uppercase}
+.sheet{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,0);transition:background-color .4s}
+.sheet.open{background:rgba(0,0,0,.4)}
+.sheet .pane{width:min(560px,100%);max-height:92svh;overflow:auto;transform:translateY(105%);transition:transform .6s var(--soft);background:var(--paper);border-radius:20px 20px 0 0;padding:0 16px 22px}
+.sheet.open .pane{transform:none}
+.sheet.closing .pane{transition:transform .35s cubic-bezier(.5,0,.75,0)}
+.pane .head{display:flex;justify-content:space-between;align-items:center;padding:14px 0 8px;position:sticky;top:0;background:var(--paper);z-index:2}
+.pane h3{font-family:var(--display);font-weight:400;font-size:30px;text-transform:uppercase;color:var(--red)}
+.pane .x{width:44px;height:44px;border-radius:50%;background:#fff;font-size:22px}
+.lines{list-style:none;display:grid;gap:8px}
+.line{background:#fff;border-radius:12px;padding:10px 10px 10px 12px;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;transition:transform .35s cubic-bezier(.5,0,.75,0),opacity .3s}
+.line.out{transform:translateX(-110%);opacity:0}
+.line b{font-size:15px}.line span{font-size:12.5px;color:#555;display:block}
+.qty{display:flex;align-items:center;gap:4px}
+.qty button{width:40px;height:40px;border-radius:50%;background:var(--paper);font-weight:800;font-size:18px}
+.qty output{min-width:20px;text-align:center;font-weight:800}
+.sum{display:flex;justify-content:space-between;font-weight:800;font-size:18px;padding:12px 2px 4px}
+.sum2{font-size:12.5px;color:#555;padding:0 2px 6px}
+.fields{display:grid;gap:10px;margin-top:8px}
+.fields label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;display:grid;gap:4px}
+.fields input,.fields textarea{font:inherit;font-size:16px;padding:12px;border:2px solid rgba(0,0,0,.15);border-radius:10px;background:#fff;text-transform:none;letter-spacing:0;font-weight:500}
+.fields input:focus,.fields textarea:focus{outline:none;border-color:var(--red)}
+.mini{position:relative;display:grid;grid-template-columns:1fr 1fr;background:#fff;border-radius:12px;padding:3px;overflow:hidden;border:2px solid rgba(0,0,0,.12)}
+.mini::before{content:"";position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:var(--ink);border-radius:9px;transition:transform .5s var(--soft)}
+.mini[data-i="1"]::before{transform:translateX(100%)}
+.mini button{position:relative;z-index:1;min-height:42px;font-weight:800;font-size:14px;transition:color .3s;text-transform:none;letter-spacing:0}
+.mini button[aria-pressed="true"]{color:#fff}
+.send{margin-top:14px;width:100%;min-height:56px;border-radius:14px;background:#1FAF54;color:#fff;font-weight:800;font-size:17px;box-shadow:0 4px 0 #168a41;display:flex;align-items:center;justify-content:center;gap:10px}
+.seal{position:fixed;left:50%;top:45%;width:150px;height:150px;margin:-75px 0 0 -75px;z-index:60;pointer-events:none}
+
+/* ---------- desktop ---------- */
+@media (min-width:900px){
+  .top{padding:20px 32px 16px;display:flex;align-items:center;justify-content:space-between;text-align:left}
+  .top .logo{margin:0;width:230px}
+  .top p{font-size:13px;margin:0}
+  .lab{grid-template-columns:1.08fr 1fr;gap:40px;padding:0 32px}
+  .stagewrap{top:0;align-self:start;padding:26px 0 30px;background:transparent}
+  .stage{max-width:620px}
+  .stage svg{max-height:none}
+  .formulatag{padding:0 20px 16px;border-radius:0 0 18px 18px}
+  .formulatag .d{font-size:15px;-webkit-line-clamp:3}
+  .formulatag .n{font-size:36px}
+  .panel{padding:10px 0 80px}
+  .step:first-child{margin-top:28px}
+  .promos{padding:56px 32px 60px}
+  .plist{grid-template-columns:repeat(3,1fr)}
+  .promo{grid-template-columns:1fr;grid-template-rows:200px auto}
+  .foot{padding:56px 32px 120px}
+  .foot .in{grid-template-columns:420px 1fr 260px;align-items:center;gap:40px}
+}
+.hico{display:inline-block;width:1.3em;height:.85em;vertical-align:-.05em;margin-right:.18em;color:var(--red)}
+.hico.pct{color:var(--mustard);width:.9em}
+.spk{display:inline-block;width:.42em;height:.42em;margin-left:.2em;vertical-align:.7em;color:var(--mustard);animation:twinkle 2.4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.6) rotate(45deg)}}
+.promo .pr{display:inline-flex;align-items:center;gap:4px}
+.promo .pr svg{width:26px;height:26px;color:var(--red-d)}
+.burst{position:fixed;width:22px;height:22px;margin:-11px 0 0 -11px;color:var(--mustard);pointer-events:none;z-index:40}
+/* ---------- presentación: la puerta del laboratorio ---------- */
+.intro{position:fixed;inset:0;z-index:80;background:var(--red);color:#fff;overflow:hidden;display:grid;place-items:center;text-align:center;padding:24px 16px calc(38svh + 26px)}
+.intro::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.14) 1.2px,transparent 1.8px) 0 0/10px 10px}
+.intro .molw{position:absolute;inset:0;width:100%;height:100%}
+.intro .in{position:relative;z-index:2;display:grid;justify-items:center;gap:14px}
+.intro .lw{position:relative;width:min(560px,84vw)}
+.intro .ilogo{display:block;width:100%;height:auto;position:relative}
+.intro .atom{position:absolute;left:50%;top:50%;width:min(118%,640px);aspect-ratio:1;translate:-50% -50%;opacity:.13;pointer-events:none}
+.intro .ik{position:relative;z-index:2;font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:var(--mustard)}
+.intro .q{position:relative;z-index:2;font-size:15px;max-width:30ch;line-height:1.35;opacity:.95}
+.startbtn{background:#fff;color:var(--red);font-family:var(--display);font-size:clamp(24px,6.6vw,34px);text-transform:uppercase;padding:14px 28px 12px;border-radius:999px;box-shadow:0 6px 0 var(--red-d);display:flex;gap:12px;align-items:center;min-height:62px;margin-top:6px}
+.startbtn svg{width:30px;height:30px}
+.intro .imascot{position:absolute;bottom:22px;left:50%;margin-left:-14svh;height:36svh;width:auto;z-index:1;overflow:visible}
+.intro .checker{position:absolute;left:0;right:0;bottom:0;z-index:3}
+@media (min-width:900px){
+  .intro{padding:40px 40px 60px 36vw}
+  .intro .imascot{left:8vw;margin:0;bottom:60px;height:62vh}
+  .intro .q{font-size:17px}
+}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <!-- papel de sus canastas: moléculas y átomos con R -->
+  <pattern id="mol" width="120" height="104" patternUnits="userSpaceOnUse">
+    <g fill="none" stroke="#E10A14" stroke-width="1.6" opacity=".38">
+      <path d="M20 20l14-8 14 8v16l-14 8-14-8zM48 20l12-10M34 44v14l-10 8M62 70l12-7 12 7v14l-12 7-12-7z"/>
+      <circle cx="60" cy="10" r="3"/><circle cx="24" cy="66" r="3"/>
+      <ellipse cx="96" cy="30" rx="13" ry="5"/><ellipse cx="96" cy="30" rx="13" ry="5" transform="rotate(60 96 30)"/><ellipse cx="96" cy="30" rx="13" ry="5" transform="rotate(-60 96 30)"/>
+    </g>
+    <text x="92" y="34" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="11" fill="#E10A14" opacity=".45">R</text>
+  </pattern>
+  <pattern id="molw" width="120" height="104" patternUnits="userSpaceOnUse">
+    <g fill="none" stroke="#fff" stroke-width="1.6" opacity=".22">
+      <path d="M20 20l14-8 14 8v16l-14 8-14-8zM48 20l12-10M34 44v14l-10 8M62 70l12-7 12 7v14l-12 7-12-7z"/>
+      <circle cx="60" cy="10" r="3"/><circle cx="24" cy="66" r="3"/>
+    </g>
+  </pattern>
+  <!-- fritura dorada -->
+  <linearGradient id="fry" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4BB58"/><stop offset=".5" stop-color="#D9822F"/><stop offset="1" stop-color="#A24D16"/></linearGradient>
+  <linearGradient id="fryB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5D184"/><stop offset=".6" stop-color="#DDA048"/><stop offset="1" stop-color="#B36F27"/></linearGradient>
+  <linearGradient id="potato" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFE07A"/><stop offset="1" stop-color="#F2B530"/></linearGradient>
+  <!-- matraz de laboratorio (Erlenmeyer): se dibuja 100 más arriba y lo sostiene desde la base, pivote 284,160 -->
+  <g id="bottleArt">
+    <path d="M276 120 V178 L249 234 Q243 248 258 248 H310 Q325 248 319 234 L292 178 V120Z" fill="#fff" fill-opacity=".82"/>
+    <path d="M263.9 204 Q284 209 304.1 204 L319 234 Q325 248 310 248 H258 Q243 248 249 234Z" fill="var(--sauce)"/>
+    <path d="M263.9 204 Q284 209 304.1 204" fill="none" stroke="#fff" stroke-width="2.5" opacity=".55"/>
+    <g stroke="#B3070F" stroke-width="2" stroke-linecap="round"><path d="M300 190h6M303 202h6M308 214h5"/></g>
+    <circle cx="284" cy="230" r="10" fill="#fff" stroke="#B3070F" stroke-width="2"/>
+    <text x="284" y="235.5" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="15" fill="#E10A14">R</text>
+    <path d="M276 120 V178 L249 234 Q243 248 258 248 H310 Q325 248 319 234 L292 178 V120Z" fill="none" stroke="#2B0A0B" stroke-width="4.5" stroke-linejoin="round"/>
+    <rect x="270" y="110" width="28" height="11" rx="4" fill="#fff" stroke="#2B0A0B" stroke-width="4.5"/>
+    <path d="M281 128 V170 M262 214 L254 232" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".9"/>
+  </g>
+
+  <!-- íconos de sus destacadas de IG, redibujados en línea -->
+  <symbol id="i-spark" viewBox="-10 -10 20 20"><path d="M0-9V9M-9 0H9M-6.4-6.4L6.4 6.4M-6.4 6.4L6.4-6.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-atom" viewBox="-60 -60 120 120"><g fill="none" stroke="currentColor" stroke-width="7"><ellipse rx="52" ry="18"/><ellipse rx="52" ry="18" transform="rotate(60)"/><ellipse rx="52" ry="18" transform="rotate(-60)"/></g><text y="15" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="44" fill="currentColor">R</text></symbol>
+  <symbol id="i-pct" viewBox="-30 -30 60 60"><path d="M24.0 0.0Q28.3 6.5 21.6 10.4Q22.7 18.1 15.0 18.8Q12.6 26.1 5.3 23.4Q0.0 29.0 -5.3 23.4Q-12.6 26.1 -15.0 18.8Q-22.7 18.1 -21.6 10.4Q-28.3 6.5 -24.0 0.0Q-28.3 -6.5 -21.6 -10.4Q-22.7 -18.1 -15.0 -18.8Q-12.6 -26.1 -5.3 -23.4Q-0.0 -29.0 5.3 -23.4Q12.6 -26.1 15.0 -18.8Q22.7 -18.1 21.6 -10.4Q28.3 -6.5 24.0 -0.0Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M-8 9L8-9"/><circle cx="-7" cy="-6" r="3.4"/><circle cx="7" cy="6" r="3.4"/></g></symbol>
+  <symbol id="i-wings" viewBox="-40 -26 86 52"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M-34 4A7.5 7.5 0 0 1 -33 -6A6.9 6.9 0 0 1 -27 -13A7.4 7.4 0 0 1 -18 -17A7.5 7.5 0 0 1 -8 -17A7.8 7.8 0 0 1 2 -14A6.7 6.7 0 0 1 10 -18A7.6 7.6 0 0 1 20 -20A7.4 7.4 0 0 1 29 -16A7.5 7.5 0 0 1 35 -8A7.5 7.5 0 0 1 35 2A6.9 6.9 0 0 1 29 9A6.9 6.9 0 0 1 20 11A6.9 6.9 0 0 1 11 9A6.4 6.4 0 0 1 3 12A7.4 7.4 0 0 1 -6 16A8.3 8.3 0 0 1 -17 17A7.8 7.8 0 0 1 -27 14A9.2 9.2 0 0 1 -34 4Z" transform="translate(-4 -4) rotate(-12) scale(.9)"/><path d="M-2-12Q-6-2 0 6" transform="translate(-4 -4) rotate(-12) scale(.9)"/><path d="M22 2H42L40 20Q39 23 36 23H28Q25 23 24 20Z" fill="var(--icon-bg,#fff)"/><path d="M28 8V18M32 8V18M36 8V18"/><path d="M-30 14l3 2M-22 18l3 1M-32 4l2 3"/></g></symbol>
+  <symbol id="flame" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#E10A14"/><path d="M10 4c1 3 4 4 4 8a4 4 0 0 1-8 0c0-2 1-3 2-4 0 2 1 2 1 2 0-3 1-4 1-6z" fill="#fff"/></symbol>
+  <symbol id="fries" viewBox="0 0 44 22"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M9 9l3-7M15 9l1-8M21 9l2-7M27 9l0-8M33 9l3-6"/><path d="M3 9h38l-4 11H7z" fill="#fff"/></g></symbol>
+</defs></svg>
+
+<!-- presentación: entras al lab -->
+<div class="intro" id="intro" hidden>
+  <svg class="molw" aria-hidden="true"><rect width="100%" height="100%" fill="url(#molw)"/></svg>
+  <svg class="imascot" id="imascot" viewBox="174 -40 220 290" aria-hidden="true"><defs><filter id="halo" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="dilate" radius="5" result="d"/><feFlood flood-color="#fff"/><feComposite in2="d" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g id="imBob" style="transform-origin:190px 452px"><g id="imBottle" style="transform-origin:284px 160px"><g class="flaskArt"></g></g><g class="chefArt" data-clip="ci"></g></g></svg>
+  <div class="in">
+    <div class="lw">
+      <svg class="atom" id="iatom" viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="1.6"><ellipse rx="56" ry="19"/><ellipse rx="56" ry="19" transform="rotate(60)"/><ellipse rx="56" ry="19" transform="rotate(-60)"/></g></svg>
+      <img class="ilogo" id="ilogo" src="assets/img/logo.png" width="1400" height="529" alt="Rufino Lab">
+    </div>
+    <p class="ik" id="ik">Laboratorio de alitas · Trujillo</p>
+    <p class="q" id="iq">Tú eliges la fórmula, nosotros bañamos tus alitas.</p>
+    <button class="startbtn tap" id="start"><svg viewBox="-60 -60 120 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="9"><ellipse rx="52" ry="18"/><ellipse rx="52" ry="18" transform="rotate(60)"/><ellipse rx="52" ry="18" transform="rotate(-60)"/></g><circle r="11" fill="currentColor"/></svg>Empezar a formular</button>
+  </div>
+  <div class="checker"></div>
+</div>
+
+<header class="top">
+  <img class="logo" id="marca" src="assets/img/logo.png" width="1400" height="529" alt="Rufino Lab">
+  <p>Alitas · Boneless · Fries &nbsp;<span>#TrueFastFoodLovers</span></p>
+</header>
+<div class="checker"></div>
+
+<main>
+<section class="lab halftone" id="lab">
+  <div class="stagewrap">
+    <div class="stage">
+      <svg id="stageSvg" viewBox="0 120 600 360" role="img" aria-label="El matraz de Rufino Lab bañando alitas con la fórmula que elijas">
+        <!-- papel de canasta detrás -->
+        <path d="M24 70 Q300 40 578 66 L586 452 L16 452Z" fill="#fff"/>
+        <path d="M24 70 Q300 40 578 66 L586 452 L16 452Z" fill="url(#mol)"/>
+        <!-- su muñeco, mirando a la canasta; el matraz va detrás de su puño -->
+        <ellipse id="fshadow" cx="212" cy="448" rx="80" ry="6" style="transform-origin:212px 448px;transform-box:view-box" fill="#000" opacity=".12"/>
+        <g transform="translate(-44 248) scale(.9)">
+        <g id="chef" style="transform-origin:190px 452px">
+          <g id="chefBob" style="transform-origin:190px 452px">
+            <g id="bottle" style="transform-origin:284px 160px"><g id="squeeze" style="transform-origin:284px 160px"><g class="flaskArt"></g></g></g>
+            <g class="chefArt" data-clip="cs"></g>
+          </g>
+        </g>
+        </g>
+        <!-- canastas (1 hasta 15 piezas, 2 desde 20): fondo + papas + alitas, chorro encima, frentes al final -->
+        <g id="basket">
+          <g id="backs"></g>
+          <path id="stream" d="M0 0" fill="none" stroke="var(--sauce)" stroke-width="9" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+          <g id="drops"></g>
+          <g id="fronts"></g>
+        </g>
+        <g id="steam" fill="none" stroke="#C9C1B8" stroke-width="4" stroke-linecap="round"></g>
+        <!-- vasito de fórmula 2 oz (solo en promos que lo traen) -->
+        <g id="dip" opacity="0">
+          <path d="M548 418 h40 l-4 28 q-1 4 -5 4 h-22 q-4 0 -5 -4z" fill="#fff" stroke="#E10A14" stroke-width="4" stroke-linejoin="round"/><path d="M560 428v14M568 428v14M576 428v14" stroke="#E10A14" stroke-width="3" stroke-linecap="round"/>
+          <ellipse id="dipSauce" cx="568" cy="420" rx="19" ry="6" fill="#fff" stroke="#E10A14" stroke-width="3"/>
+        </g>
+        <!-- mostrador con cuadros -->
+        <rect x="0" y="452" width="600" height="68" fill="#E10A14"/>
+        <g id="checkRow"></g>
+      </svg>
+      <div class="formulatag" id="ftag" aria-live="polite">
+        <div class="k" id="fk">Laboratorio</div>
+        <div><span class="n" id="fn">Elige tu fórmula</span><span class="heat" id="fh"></span></div>
+        <div class="d" id="fd">Toca una fórmula y mira cómo bañamos tus alitas.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="step">
+      <h2 id="h1"><svg class="hico" aria-hidden="true"><use href="#i-wings"/></svg>¿Cuántas?<small id="h1s">Con papas fritas y bañadas en tus fórmulas. Precios de la carta.</small></h2>
+      <div class="seg" id="seg" data-v="alitas" role="group" aria-label="Tipo">
+        <button class="tap" aria-pressed="true" data-v="alitas">Alitas</button>
+        <button class="tap" aria-pressed="false" data-v="boneless">Boneless</button>
+      </div>
+      <div class="rows" id="rows" role="radiogroup" aria-label="Cantidad"></div>
+    </div>
+
+    <div class="step">
+      <h2><svg class="hico" aria-hidden="true"><use href="#i-atom"/></svg>Tus fórmulas<small id="slotHint">Cada cantidad trae sus fórmulas. Elige una por espacio.</small></h2>
+      <div class="slots" id="slots"></div>
+      <div class="shelf mild"><div class="side">Sin picante</div><div class="chips" id="mild"></div></div>
+      <div class="spicezone"><svg width="18" height="18"><use href="#flame"/></svg>Spice zone</div>
+      <div class="shelf hot"><div class="side">Picantes</div><div class="chips" id="hot"></div></div>
+      <button class="addbtn tap" id="add" aria-disabled="true">Agregar al pedido · <span id="addP">S/ 29</span></button>
+      <p class="hint" id="hint"></p>
+    </div>
+  </div>
+</section>
+
+<div class="checker"></div>
+<section class="promos" id="promos">
+  <div class="in">
+    <h2><svg class="hico pct" aria-hidden="true"><use href="#i-pct"/></svg>Promos <span>del lab</span><svg class="spk" aria-hidden="true"><use href="#i-spark"/></svg></h2>
+    <div class="plist" id="plist"></div>
+  </div>
+</section>
+<div class="checker"></div>
+
+<footer class="foot halftone">
+  <div class="in">
+    <div class="sign" aria-label="Wings, fries, flavor, repeat"><div><div class="w">Wings</div><div class="f">Fries</div><div class="fl">Flavor</div><div class="r">Repeat</div></div></div>
+    <div class="locs">
+      <div class="loc">
+        <h3>Trujillo</h3>
+        <p>Borgoño 396</p>
+        <a href="tel:+51906755197">906 755 197</a><a href="https://maps.google.com/?q=Borgo%C3%B1o+396+Trujillo" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+      <p class="meta"><b>6:00 p. m. a 11:00 p. m.</b>Salón, delivery y para llevar · <a href="https://www.instagram.com/rufino_lab/" target="_blank" rel="noopener" style="color:var(--red);font-weight:800">@rufino_lab</a></p>
+    </div>
+    <img class="bolsa" src="assets/img/bolsa.webp" width="512" height="640" loading="lazy" alt="Bolsa de Rufino Lab con el letrero Wings Fries Flavor Repeat">
+  </div>
+</footer>
+</main>
+
+<div class="bar" id="bar"><button class="tap" id="openOrder"><span class="cnt" id="cnt">0</span><span class="tot" id="tot">S/ 0</span><span class="cta">Ver pedido</span></button></div>
+<div class="sheet" id="sheet" hidden><div class="pane" role="dialog" aria-modal="true" aria-labelledby="sheetT">
+  <div class="head"><h3 id="sheetT">Tu pedido</h3><button class="x tap" id="closeOrder" aria-label="Cerrar">×</button></div>
+  <ul class="lines" id="lines"></ul>
+  <div class="sum"><span>Total</span><span id="sumT">S/ 0</span></div>
+  <p class="sum2" id="sum2">El delivery se confirma por WhatsApp según tu zona.</p>
+  <div class="fields">
+    <label>¿Cómo lo quieres?<div class="mini" id="modo" data-i="0"><button aria-pressed="true" data-i="0">Delivery</button><button aria-pressed="false" data-i="1">Recojo en local</button></div></label>
+    <label>Nombre<input id="nombre" autocomplete="name" placeholder="Tu nombre"></label>
+    <label id="dirL">Dirección<input id="dir" autocomplete="street-address" placeholder="Calle, número, urbanización"></label>
+    <label id="refL">Referencia<input id="ref" placeholder="Cerca de…"></label>
+  </div>
+  <button class="send tap" id="enviar"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2s-1 .2-3.4-.7a11.7 11.7 0 0 1-4.6-4.1c-.4-.6-1-1.7-1-2.9s.7-1.8.9-2 .5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6a8.6 8.6 0 0 0 1.6 2 7.8 7.8 0 0 0 2.3 1.4c.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3a2.3 2.3 0 0 1-.1 1.5z"/></svg>Enviar pedido por WhatsApp</button>
+</div></div>
+
+<script>
+const Q=new URLSearchParams(location.search);
+const DRY=Q.has('dry'), STATIC=Q.has('static')||matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const NS='http://www.w3.org/2000/svg';
+const svgEl=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
+
+/* Rufino, redibujado a partir de su empaque (19.png): matraz Erlenmeyer de vidrio en línea pura,
+   trazo grueso uniforme con puntas redondas, sin relleno de color (el fondo se ve a través).
+   Escena 600x520: pies en y≈450, mira a la derecha. El puño derecho agarra el matraz chico por el cuello:
+   PIVOTE = (284,160); boca del matraz chico en (284, 160-TIPL).
+   chef(ink, fill, glass, clip): ink = color de línea, fill = color del fondo (tapa lo que está detrás),
+   glass = relleno opcional del cuerpo de vidrio (patrón), clip = prefijo único de ids.
+   La salida se parte en '<!--FRONT-->': antes = capa de atrás, después = el puño que envuelve el matraz chico.
+   Orígenes de giro: leg-b (168,386), leg-f (228,386), armB (94,216 = hombro izquierdo). */
+const TIPL=88*2.05;
+function chef(ink,fill,glass,clip){
+  const W=4.8,S=`stroke="${ink}" stroke-width="${W}" stroke-linecap="round" stroke-linejoin="round"`;
+  // cuerpo: nariz (bulto bajo el lente derecho), lado derecho recto, panza redonda a la izquierda, base ligeramente caída
+  const BODY='M212 172C212 186 226 192 226 204C226 216 212 220 210 228L252 345C256 356 250 368 234 368C176 373 104 371 70 364C46 360 34 346 40 326L100 218C97 204 106 186 114 170';
+  const BODYC=BODY+'L212 172Z';
+  // tubo (manguera / dedo): línea gruesa de tinta + línea de fondo encima => tubo con borde
+  const T=W*3.6;
+  const tube=(d,t=T)=>`<path d="${d}" fill="none" stroke="${ink}" stroke-width="${t}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${fill}" stroke-width="${t-2*W}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  // anillas de la manguera (rayitas a lo ancho)
+  const ribs=(x1,y1,x2,y2,ts)=>{const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy),nx=-dy/L*(T/2-W/2+1),ny=dx/L*(T/2-W/2+1);
+    return `<path d="${ts.map(t=>{const x=x1+dx*t,y=y1+dy*t;return `M${(x-nx).toFixed(1)} ${(y-ny).toFixed(1)}L${(x+nx).toFixed(1)} ${(y+ny).toFixed(1)}`}).join('')}" ${S} stroke-width="${W*.8}"/>`};
+  // zapatilla: punta hacia +x (sx=1) o -x (sx=-1); origen = donde entra el tobillo
+  const shoe=(x,y,sx)=>`<g transform="translate(${x} ${y}) scale(${sx} 1)">
+    <path d="M-28 28C-38 28 -38 38 -28 38L38 38C50 38 50 28 40 28Z" fill="${fill}" ${S}/>
+    <path d="M-10 -2C-34 -4 -40 22 -22 28L34 28C56 28 60 10 42 4C30 0 18 -6 6 -10Z" fill="${fill}" ${S}/>
+    <path d="M-18 8l-4 14M-9 8l-4 14M0 9l-4 13" ${S} stroke-width="${W*.85}"/></g>`;
+  // lente con dos rayas diagonales paralelas (como en el empaque)
+  const lens=(cx,cy,r)=>{const a=-72*Math.PI/180,dx=Math.cos(a),dy=Math.sin(a);
+    const ch=o=>{const px=-dy*o,py=dx*o,h=Math.sqrt(Math.max(0,(r-4)**2-o*o));return `M${(cx+px-dx*h).toFixed(1)} ${(cy+py-dy*h).toFixed(1)}L${(cx+px+dx*h).toFixed(1)} ${(cy+py+dy*h).toFixed(1)}`};
+    return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" ${S}/><path d="${ch(-8)}${ch(8)}" ${S}/>`};
+  // marcas de medida en el lado derecho (cruzan el borde, más afuera que adentro)
+  const edgeX=y=>210+(y-228)*42/117;
+  const ticks=[[238,22,16],[258,22,16],[302,22,14],[322,16,10],[342,10,6]].map(([y,o,i])=>{const x=edgeX(y);return `M${(x-i).toFixed(1)} ${y}H${(x+o).toFixed(1)}`}).join('');
+  // guante abierto: palma + dedos de fideo (tubos) + pulgar; coordenadas locales, muñeca en 0,0, dedos hacia +x
+  const PALM='M0 -11C10 -17 22 -21 31 -17L44 -8C49 0 49 10 44 16L30 24C19 27 8 23 0 11Z';
+  const FING=['M14 -12Q22 -30 30 -44','M40 -10Q58 -22 76 -30','M45 -1Q68 -6 88 -6','M44 9Q66 14 82 22','M36 17Q50 28 60 40'];
+  const glove=`<g transform="translate(118 282) rotate(50) scale(1.15)">
+    <path d="M-10 -17C-3 -19 3 -19 10 -17L13 16C4 20 -4 20 -13 16Z" fill="${fill}" ${S}/>
+    <path d="${PALM}" fill="${ink}" ${S} stroke-width="${2*W}"/>
+    <path d="${FING.join('')}" fill="none" stroke="${ink}" stroke-width="${12+2*W}" stroke-linecap="round"/>
+    <path d="${PALM}" fill="${fill}"/>
+    <path d="${FING.join('')}" fill="none" stroke="${fill}" stroke-width="12" stroke-linecap="round"/>
+    <path d="M0 -18L-3 -25" ${S} stroke-width="${W*.8}"/><circle cx="-4" cy="-29" r="4" fill="${ink}"/><circle cx="-2" cy="22" r="2.6" fill="${ink}"/>
+  </g>`;
+  // puño que agarra el cuello del matraz chico: masa redonda, nudillos festoneados a la derecha, pulgar en gancho abajo
+  const fist=`<g class="fist">
+    <path d="M262 132C274 125 292 127 300 133C312 131 317 144 306 148C319 148 319 160 306 162C319 162 319 174 306 176C317 178 313 191 300 189C290 193 272 193 262 187C247 181 246 139 262 132Z" fill="${fill}" ${S}/>
+    <path d="M306 148C296 151 287 151 283 146M306 162C296 165 287 165 283 160M306 176C296 179 287 179 283 174M251 172C255 161 271 159 275 168C278 177 269 183 263 179" fill="none" ${S}/>
+  </g>`;
+  return `
+<defs><clipPath id="${clip}"><path d="${BODYC}"/></clipPath></defs>
+<g class="leg-b">${tube('M124 356L104 410')}${ribs(124,356,104,410,[.5,.68,.86])}${shoe(104,410,-1)}</g>
+<g class="leg-f">${tube('M174 356L194 410')}${ribs(174,356,194,410,[.42,.58,.74,.9])}${shoe(194,410,1)}</g>
+${tube('M242 278C258 252 268 214 276 180')}
+<path d="${BODYC}" fill="${fill}"/>
+${glass?`<path d="${BODYC}" fill="${glass}"/>`:''}
+<path d="${BODY}" fill="none" ${S}/>
+<path d="${ticks}" ${S}/><circle cx="214" cy="348" r="3.4" fill="${ink}"/>
+<rect x="108" y="60" width="100" height="22" rx="11" fill="none" ${S}/>
+<path d="M126 82V118M188 82V118M188 98H202M124 102C114 100 108 106 110 114" fill="none" ${S}/>
+<g class="eyes">${lens(126,145,30)}${lens(202,145,30)}</g>
+<path d="M152 160Q164 172 176 160M230 140H254Q266 140 266 150Q266 159 256 159H250" fill="none" ${S}/>
+<path d="M190 176C188 192 180 202 168 204C160 205 156 198 160 194M178 212C168 212 166 224 176 226M118 176C118 196 128 212 142 212C150 212 150 204 144 202" fill="none" ${S}/>
+<g class="armB">${tube('M94 216C84 240 96 262 114 278')}${glove}</g>
+<!--FRONT-->${fist}`;
+}
+/* matraz chico de fórmula: en reposo, vertical, boca en (284,160-TIPL), agarrado por el cuello en el pivote */
+function flaskArt(ink='#E10A14',fill='#fff'){
+  const W=4.8,S=`stroke="${ink}" stroke-width="${W}" stroke-linecap="round" stroke-linejoin="round"`;
+  const G='M277 120V164L249 216Q244 228 257 228H311Q324 228 319 216L291 164V120Z';
+  return `<g class="flaskArt">
+  <path d="${G}" fill="${fill}" fill-opacity=".85"/>
+  <path d="M262 192Q284 197 306 192L319 216Q324 228 311 228H257Q244 228 249 216Z" fill="var(--sauce)"/>
+  <circle cx="270" cy="200" r="2.4" fill="${ink}"/><circle cx="298" cy="202" r="2.8" fill="${ink}"/><circle cx="284" cy="186" r="2" fill="${ink}"/>
+  <path d="M262 221H298" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+  <circle cx="284" cy="210" r="9" fill="#fff" stroke="${ink}" stroke-width="2"/>
+  <text x="284" y="215" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="14" fill="#E10A14">R</text>
+  <path d="${G}" fill="none" ${S}/>
+  <rect x="271" y="112" width="26" height="9" rx="4.5" fill="${fill}" ${S}/>
+</g>`;
+}
+/* el brazo delantero va aparte, encima del matraz chico, para que el puño lo agarre */
+/* el protagonista es el matraz con su R: grande, centrado en su pivote (284,160) para girar desde el cuerpo */
+const FLASK_K=2.05;
+$$('.flaskArt').forEach(g=>{g.innerHTML=`<g transform="translate(284 160) scale(${FLASK_K*1.3} ${FLASK_K}) translate(-284 -200)">`+flaskArt('#E10A14','#fff')
+  .replace(/<circle cx="284" cy="210" r="9"[^>]*\/>\s*<text[^>]*>R<\/text>/,'<circle cx="284" cy="212" r="13" fill="#fff" stroke="#E10A14" stroke-width="2"/><use href="#i-atom" x="272" y="200" width="24" height="24" style="color:#E10A14"/>')+'</g>'});
+/* el muñeco es el dibujo de su bolsa (trazado, con el lado que tapaba la bolsa completado), volteado hacia la canasta;
+   blanco con línea roja como en el empaque. El puño agarra el matraz por el cuello, como agarra la bolsa. */
+/* su muñeco calcado línea por línea sobre la bolsa (raw/chef/traced.svg), volteado hacia la canasta; el puño agarra el matraz */
+const BAG_CHEF='';
+$$('.chefArt').forEach(g=>{g.innerHTML=g.dataset.part?'':BAG_CHEF});
+
+/* ---------- carta (fuente: carta "Wings & Boneless" y "12 fórmulas a elección") ---------- */
+const CARTA={
+  alitas:[{n:5,f:1,p:18,papas:1},{n:10,f:2,p:29,papas:1,big:1},{n:20,f:3,p:57,papas:2},{n:30,f:4,p:87,papas:2,big:1}],
+  boneless:[{n:5,f:1,p:18,papas:1},{n:10,f:2,p:27,papas:1,big:1},{n:20,f:3,p:55,papas:2},{n:30,f:4,p:79,papas:2,big:1}]
+};
+/* el color es nuestro (para pintar la salsa); nombres, descripciones y picor son de su carta */
+const F=[
+  {id:'bbq',n:'Original BBQ',d:'Fórmula clásica, dulce y ahumada perfecta para realzar el sabor de tus alitas.',c:'#6E2412'},
+  {id:'crispy',n:'Crispy Wings',d:'Fórmula de alitas crujientes. Crocantes por fuera y jugosas por dentro.',c:'#C98A2E'},
+  {id:'garlic',n:'Garlic Parmesan',d:'La mezcla perfecta de alitas, crema de ajo, perejil y queso parmesano.',c:'#EADFB4'},
+  {id:'honey',n:'Honey Mustard',d:'Mezcla perfecta entre dulzura y cremosidad. Elaborada a base de miel y mostaza.',c:'#E2A81E'},
+  {id:'acevichada',n:'Acevichada',d:'Cremosa y ligeramente ácida, con el sabor cítrico del ceviche. Para darle frescura a tus alas.',c:'#F3E6C6'},
+  {id:'tocino',n:'Tocino',d:'Es uno de nuestros experimentos, creamos la salsa de tocino.',c:'#A24B28'},
+  {id:'maracuya',n:'Maracuyá',d:'Creamos nuestra salsa maracuyá con un sabor más tropical.',c:'#F4B416'},
+  {id:'lemon',n:'Lemon Pepper',d:'Salsa hecha a base de pimienta y limón.',c:'#D8D27C'},
+  {id:'hawaiian',n:'Hawaiian',d:'Salsa agridulce con piña. Mezcla de dulce y salado, con sabor tropical.',c:'#E98A2A'},
+  {id:'huacatay',n:'Huacatay',d:'Alitas bañadas en salsa a base de huacatay.',c:'#71892C'},
+  {id:'hotperu',n:'Hot Peruvian',d:'Experimentando nació nuestra salsa picante peruana a base de 4 ajíes nativos. ¡Puro fuego!',c:'#D93A12',h:5},
+  {id:'buffalo',n:'Buffalo',d:'Bañadas en nuestra salsa típica americana buffalo.',c:'#E2561A',h:4},
+  {id:'asian',n:'Asian Spicy',d:'Un golpe de especias orientales. Pica, pero no vas a querer compartir.',c:'#9E2A1C',h:4,off:1},
+  {id:'mango',n:'Mango Habanero',d:'Bañadas en nuestra salsa picante de mango.',c:'#F08A18',h:3},
+  {id:'hotbbq',n:'Hot BBQ',d:'Si eres amante de la BBQ, prueba nuestra versión picante.',c:'#7E1C0D',h:2}
+];
+const FB=Object.fromEntries(F.map(f=>[f.id,f]));
+const LIMA_NOW=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Lima'}));
+const PROMOS=[
+  {id:'duo',t:'Duo Lab',sub:'Combo para 2',p:35,img:'dip',items:['10 alitas (2 sabores)','Papa grande','4 boneless gratis','1 fórmula 2 oz','Bebida 500 ml'],
+   slots:[{k:'w',l:'Alitas · sabor 1'},{k:'w',l:'Alitas · sabor 2'},{k:'dip',l:'Fórmula 2 oz'}]},
+  {id:'box',t:'Wing Box',sub:'Para compartir',p:39,img:'papas',items:['10 alitas (2 sabores)','Papa grande','5 alitas gratis (1 sabor)'],note:'Solo delivery o para llevar.',
+   slots:[{k:'w',l:'Alitas · sabor 1'},{k:'w',l:'Alitas · sabor 2'},{k:'w',l:'5 gratis · sabor'}]},
+];
+const HALLO={until:new Date(2026,9,31,23,59),img:'fachada',combos:[
+  {id:'h3',t:'Hallowings 03',p:39,d:'10 alitas + 1 papa regular + 5 alitas gratis'},
+  {id:'h2',t:'Hallowings 02',p:59,d:'20 alitas + 1 papa grande + 5 alitas gratis'},
+  {id:'h1',t:'Hallowings 01',p:89,d:'30 alitas + 2 papas grandes + bebida 1 L gratis'}]};
+
+/* ---------- escenario: alitas ---------- */
+/* una sola alita (la plana, curva, con las puntitas de hueso) y el boneless empanizado */
+const PIECE={
+  flat:{d:'M-31.3 -3.0Q-30.4 -4.9 -29.5 -6.6Q-28.6 -8.3 -25.9 -9.5Q-23.2 -10.7 -21.3 -12.1Q-19.4 -13.6 -16.0 -14.0Q-12.5 -14.5 -9.8 -16.0Q-7.0 -17.5 -3.5 -17.5Q0.0 -17.5 3.4 -18.5Q6.8 -19.6 9.7 -19.0Q12.6 -18.4 16.3 -18.4Q19.9 -18.4 22.3 -17.1Q24.6 -15.7 27.2 -14.0Q29.9 -12.4 31.2 -10.1Q32.5 -7.9 33.9 -5.5Q35.3 -3.1 34.8 -0.6Q34.3 1.9 33.8 4.3Q33.3 6.7 31.2 8.7Q29.2 10.7 27.7 12.5Q26.2 14.2 22.8 14.9Q19.5 15.5 17.6 15.7Q15.8 15.9 12.8 14.7Q9.7 13.5 8.0 12.9Q6.3 12.2 4.1 10.3Q2.0 8.3 -0.2 8.8Q-2.3 9.3 -4.0 8.4Q-5.7 7.6 -8.7 8.6Q-11.7 9.6 -13.7 9.7Q-15.6 9.8 -18.5 9.6Q-21.5 9.4 -22.9 8.6Q-24.4 7.8 -26.8 6.8Q-29.3 5.8 -29.8 4.3Q-30.3 2.9 -31.3 1.0Q-32.2 -1.0 -31.3 -3.0Z',
+        top:{knobs:[[-30,-3.4,3],[-30.5,2.6,2.6]]},crisp:'M-18-7q2-3 5 0M-4-11q2-3 5 0M12-12q2-3 5 0M24-2q2-3 5 0M10 4q2-3 5 0M-14 2q2-3 5 0',
+        crease:'M2 8q4-6 2-14',gl:'M-20-8q12-8 26-9M18-12q8 0 12 6',drip:'M16 14c0 7 1 11 4 11s4-4 4-11z'},
+  nug: {d:'M-25.1 -5.1Q-22.6 -7.6 -23.3 -10.6Q-24.0 -13.5 -21.5 -14.9Q-19.1 -16.3 -17.7 -18.5Q-16.4 -20.7 -12.5 -19.9Q-8.6 -19.1 -6.2 -21.0Q-3.9 -22.9 -1.1 -21.0Q1.8 -19.2 5.3 -20.2Q8.7 -21.1 10.9 -19.0Q13.0 -16.9 17.1 -16.1Q21.1 -15.4 22.1 -12.5Q23.0 -9.6 25.6 -7.5Q28.2 -5.3 27.3 -2.7Q26.4 -0.1 27.6 2.7Q28.8 5.5 26.1 7.4Q23.5 9.3 22.3 11.7Q21.0 14.1 17.1 14.6Q13.2 15.1 11.0 16.9Q8.7 18.7 5.3 17.6Q1.8 16.6 -1.4 18.5Q-4.6 20.4 -6.9 18.1Q-9.3 15.7 -13.4 16.1Q-17.4 16.5 -18.7 13.9Q-19.9 11.3 -23.2 9.9Q-26.6 8.5 -26.2 5.6Q-25.9 2.8 -26.8 0.1Q-27.6 -2.6 -25.1 -5.1Z',
+        crisp:'M-18-10q2-3 5 0M-4-14q2-3 5 0M10-8q2-3 5 0M16 6q2-3 5 0M-14 6q2-3 5 0M0 2q2-3 5 0M-2 12q2-3 5 0',
+        gl:'M-16-12q7-5 14-3',drip:'M-3 17c0 7 1 11 4 11s4-4 4-11z'}
+};
+/* hueso con sus dos nudos: primero el contorno grueso, encima el relleno, así se ve de una pieza */
+function bone(b){
+  const g=svgEl('g',{});
+  for(const pass of [{fill:'#6B2E0E',grow:2.4},{fill:'#FBF1DF',grow:0}]){
+    (b.knobs||[]).forEach(([x,y,r])=>g.append(svgEl('circle',{cx:x,cy:y,r:r+pass.grow,fill:pass.fill})));
+    if(b.shaft){const[x,y,w,h]=b.shaft;g.append(svgEl('rect',{x:x-pass.grow,y:y-pass.grow,width:w+2*pass.grow,height:h+2*pass.grow,rx:2,fill:pass.fill}))}
+  }
+  return g;
+}
+const SPECK=[[-18,-6,1.7],[-8,3,1.3],[4,-9,1.5],[-14,9,1.2],[12,-2,1.4],[20,5,1.1],[-2,10,1.2]];
+const CURTAIN='M-46-70H46V9q-5.75 8-11.5 0t-11.5 0t-11.5 0t-11.5 0t-11.5 0t-11.5 0t-11.5 0t-11.5 0V-70Z';
+/* las canastas: una hasta 15 piezas; desde 20 se reparten en dos para que no se amontonen */
+const seeded=s=>()=>(s=(s*16807)%2147483647)/2147483647;
+const tri=m=>m*(m+1)/2;
+function baskets(N){return N>=20?[{cx:360,w:152,n:Math.ceil(N/2)},{cx:518,w:152,n:Math.floor(N/2)}]:[{cx:440,w:280,n:N}]}
+const PSCALE={5:1.4,10:1.12,15:.98};
+function pileLayout(b,kind,seed){
+  const s=b.w<200?(b.n>10?.72:.82):(PSCALE[b.n]||.9),sp=38*s,rowH=17*s+2,base=396,R=seeded(seed);
+  let k=Math.max(1,Math.min(Math.floor((b.w-24-64*s)/sp)+1,Math.ceil((Math.sqrt(8*b.n+1)-1)/2))),left=b.n;const rows=[];
+  while(left>0){const t=Math.min(k,left);rows.push(t);left-=t;if(left<=tri(k-1))k=Math.max(1,k-1)}
+  const out=[];
+  rows.forEach((n,ri)=>{for(let j=0;j<n;j++)out.push({
+    x:b.cx+(j-(n-1)/2)*sp+(R()-.5)*12+(ri%2?sp*.3:0),y:base-ri*rowH+(R()-.5)*8,r:(R()-.5)*80+(R()<.25?(R()<.5?-70:70):0),flip:R()<.5,s:s*(.92+R()*.14),
+    type:kind==='boneless'?'nug':'flat'})});
+  return out;
+}
+let wingEls=[],clipN=0,steamAnims=[];
+function makePiece(p,kind){
+  const sh=PIECE[p.type],id='wc'+(clipN++);
+  const ax=kind==='boneless'?1:.82,ay=kind==='boneless'?1:1.3;
+  const w=svgEl('g',{transform:`translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) rotate(${p.r.toFixed(1)}) scale(${((p.flip?-1:1)*p.s*ax).toFixed(3)} ${(p.s*ay).toFixed(3)})`});
+  const inner=svgEl('g',{});
+  const cp=svgEl('clipPath',{id});cp.append(svgEl('path',{d:sh.d}));inner.append(cp);
+  if(sh.back)inner.append(bone(sh.back));
+  inner.append(svgEl('path',{d:sh.d,fill:kind==='boneless'?'url(#fryB)':'url(#fry)'}));
+  const tex=svgEl('g',{'clip-path':`url(#${id})`});
+  SPECK.forEach(([x,y,r])=>tex.append(svgEl('circle',{cx:x,cy:y,r,fill:kind==='boneless'?'#FBE3A8':'#8C4416',opacity:kind==='boneless'?.8:.3})));
+  tex.append(svgEl('path',{d:sh.crisp,fill:'none',stroke:kind==='boneless'?'#9A5A1C':'#7E3A10','stroke-width':1.6,'stroke-linecap':'round',opacity:.55}));
+  if(sh.crease)tex.append(svgEl('path',{d:sh.crease,fill:'none',stroke:'#7E3A10','stroke-width':1.8,'stroke-linecap':'round',opacity:.45}));
+  inner.append(tex);
+  const coat=svgEl('g',{'clip-path':`url(#${id})`});
+  const curtain=svgEl('path',{d:CURTAIN,fill:'#fff',opacity:0});
+  coat.append(curtain);inner.append(coat);
+  inner.append(svgEl('path',{d:sh.d,fill:'none',stroke:'#6B2E0E','stroke-width':2.6,'stroke-linejoin':'round'}));
+  if(sh.top)inner.append(bone(sh.top));
+  const gloss=svgEl('path',{d:sh.gl,fill:'none',stroke:'#fff','stroke-width':3,'stroke-linecap':'round',opacity:0});
+  inner.append(gloss);
+  const drip=svgEl('path',{d:sh.drip,fill:'#fff',opacity:0,style:'transform-box:fill-box;transform-origin:50% 0'});
+  inner.append(drip);
+  w.append(inner);
+  return {w,inner,curtain,gloss,drip,x:p.x,y:p.y,slot:-1};
+}
+/* fondo de cada canasta: su papel de moléculas con borde ondulado */
+function liner(cx,w){
+  const x0=cx-w/2+10,x1=cx+w/2-10,n=Math.max(4,Math.round((x1-x0)/36));let d=`M${x0} 404C${x0-2} 378 ${x0+4} 360 ${x0+12} 352`;
+  for(let i=1;i<=n;i++){const x=x0+12+(x1-x0-24)*i/n,y=i%2?340:350;d+=`Q${(x-(x1-x0-24)/n/2).toFixed(1)} ${i%2?334:356} ${x.toFixed(1)} ${y}`}
+  return d+`C${x1+4} 360 ${x1+2} 378 ${x1} 404Z`;
+}
+function front(cx,w){
+  const g=svgEl('g',{});
+  g.append(svgEl('path',{d:`M${cx-w/2} 402L${cx+w/2} 402L${cx+w/2-18} 456L${cx-w/2+18} 456Z`,fill:'#E10A14',stroke:'#B3070F','stroke-width':3,'stroke-linejoin':'round'}));
+  g.append(svgEl('path',{d:`M${cx-w/2+2} 402H${cx+w/2-2}`,stroke:'#fff','stroke-width':3,opacity:.35}));
+  const holes=Math.floor((w-50)/36);
+  for(let i=0;i<holes;i++)g.append(svgEl('rect',{x:(cx-(holes*36-12)/2+i*36).toFixed(1),y:420,width:24,height:9,rx:4,fill:'#B3070F'}));
+  return g;
+}
+/* papas detrás de cada pila */
+function fries(g,b,top,seed){
+  const n=Math.max(5,Math.round(b.w/34)),R=seeded(seed);
+  for(let i=0;i<n;i++){
+    const x=b.cx-b.w/2+22+i*((b.w-44)/(n-1))+(R()-.5)*8,t=Math.max(318,top+8-R()*22),h=404-t;
+    g.append(svgEl('rect',{x:-5.5,y:-h,width:11,height:h,rx:2.5,fill:'url(#potato)',stroke:'#C98418','stroke-width':2.5,transform:`translate(${x.toFixed(1)} 404) rotate(${((R()-.5)*24).toFixed(1)})`}));
+  }
+}
+let fryGs=[];
+function buildWings(kind,N){
+  const backs=$('#backs'),fronts=$('#fronts');backs.textContent='';fronts.textContent='';wingEls=[];fryGs=[];
+  steamAnims.forEach(a=>a.cancel());steamAnims=[];const st=$('#steam');st.textContent='';
+  baskets(N).forEach((b,bi)=>{
+    const lay=pileLayout(b,kind,N*97+bi*13+(kind==='boneless'?3:7)),top=Math.min(...lay.map(p=>p.y))-14;
+    const bg=svgEl('g',{}),d=liner(b.cx,b.w);
+    bg.append(svgEl('path',{d,fill:'#fff',stroke:'#E10A14','stroke-width':3,'stroke-linejoin':'round'}));
+    bg.append(svgEl('path',{d,fill:'url(#mol)'}));
+    const fg=svgEl('g',{});fries(fg,b,top,bi*31+N);bg.append(fg);fryGs.push(fg);
+    const wg=svgEl('g',{});lay.forEach(p=>{const we=makePiece(p,kind);wg.append(we.w);wingEls.push(we)});bg.append(wg);
+    const R2=seeded(N*7+bi);for(let i=0;i<4;i++){const x=b.cx-b.w/2+18+R2()*(b.w-36),y=top+4+R2()*16;bg.append(svgEl('path',{d:`M${(x-3).toFixed(1)} ${y.toFixed(1)}q3-5 7-1q3 4-2 6q-6 1-5-5z`,fill:'#F2C46A',stroke:'#A30812','stroke-width':1.8,'stroke-linejoin':'round'}))}
+    backs.append(bg);fronts.append(front(b.cx,b.w));
+    // vapor sobre cada pila
+    [-1,1].forEach((k,i)=>{
+      const p=svgEl('path',{d:`M${b.cx+k*b.w/7} ${top-8}c-7-8 7-14 0-22s7-14 0-22`,opacity:0});st.append(p);
+      if(!STATIC)steamAnims.push(p.animate([{opacity:0,transform:'translateY(6px)'},{opacity:.75,offset:.4},{opacity:0,transform:'translateY(-22px)'}],{duration:2200,delay:(bi*2+i)*600,iterations:Infinity,easing:'ease-out'}));
+    });
+  });
+}
+function checkRow(){const g=$('#checkRow');for(let i=0;i<600/20;i++){g.append(svgEl('rect',{x:i*20,y:452,width:10,height:10,fill:'#fff'}));g.append(svgEl('rect',{x:i*20+10,y:462,width:10,height:10,fill:'#fff'}))}}
+checkRow();
+
+/* ---------- estado ---------- */
+let cur={kind:'alitas',idx:1,promo:null,slots:[],active:0};
+let order=store.get('rufino.order',[]);
+
+function slotDefs(){
+  if(cur.promo)return PROMOS.find(p=>p.id===cur.promo).slots;
+  const r=CARTA[cur.kind][cur.idx];return Array.from({length:r.f},(_,i)=>({k:'w',l:`Fórmula ${i+1}`}));
+}
+function curPrice(){return cur.promo?PROMOS.find(p=>p.id===cur.promo).p:CARTA[cur.kind][cur.idx].p}
+function wingSlotIndexes(){return slotDefs().map((s,i)=>s.k==='w'?i:-1).filter(i=>i>=0)}
+/* cuántas piezas van en la canasta: la cantidad elegida (o lo que trae la promo) */
+function pileSpec(){
+  if(cur.promo==='duo')return{kind:'alitas',N:10};
+  if(cur.promo==='box')return{kind:'alitas',N:15};
+  return{kind:cur.kind,N:CARTA[cur.kind][cur.idx].n};
+}
+/* cada fórmula baña una zona de la canasta, de izquierda a derecha */
+function assignWings(){
+  const ws=wingSlotIndexes(),byX=[...wingEls].sort((a,b)=>a.x-b.x);
+  byX.forEach((we,i)=>{we.slot=ws[Math.floor(i*ws.length/byX.length)]});
+}
+function resetLoad(keep){
+  const defs=slotDefs(),old=cur.slots;
+  cur.slots=defs.map((_,i)=>keep&&old[i]||null);cur.active=Math.max(0,cur.slots.findIndex(s=>!s));
+  const sp=pileSpec();buildWings(sp.kind,sp.N);assignWings();
+  $('#dip').style.opacity=defs.some(s=>s.k==='dip')?1:0;
+  $('#dipSauce').setAttribute('fill','#fff');
+  cur.slots.forEach((id,i)=>{if(!id)return;const c=FB[id].c;
+    wingEls.filter(w=>w.slot===i).forEach((w,k)=>coatWing(w,c,false,0,k));
+    if(defs[i].k==='dip')$('#dipSauce').setAttribute('fill',c)});
+  renderSlots();renderChips();updateAdd();
+  if(!STATIC)dropWings();
+}
+
+/* ---------- panel ---------- */
+function friesIcons(r){return Array.from({length:r.papas},()=>`<svg viewBox="0 0 44 22" style="height:${r.big?22:17}px;color:var(--ink)"><use href="#fries"/></svg>`).join('')}
+function renderRows(){
+  const el=$('#rows');el.innerHTML=CARTA[cur.kind].map((r,i)=>`<button class="row tap" role="radio" aria-checked="${!cur.promo&&i===cur.idx}" data-i="${i}">
+    <span class="q">${r.n}</span><span class="what">${cur.kind==='alitas'?'Alitas':'Boneless'}<em>${r.f} fórmula${r.f>1?'s':''}</em></span><span class="fries" aria-label="${r.papas} porción${r.papas>1?'es':''} de papas">${friesIcons(r)}</span><span class="p">S/ ${r.p}</span></button>`).join('');
+  $$('#rows .row').forEach(b=>b.onclick=()=>{const keep=!cur.promo;cur.promo=null;cur.idx=+b.dataset.i;renderRows();resetLoad(keep);setTag(null)});
+}
+function renderSlots(){
+  const defs=slotDefs();
+  $('#slots').innerHTML=defs.map((s,i)=>{const f=cur.slots[i]&&FB[cur.slots[i]];return `<button class="slot tap ${f?'filled':''}" data-i="${i}" data-active="${i===cur.active}"><i style="${f?`background:${f.c}`:''}"></i><span><small>${s.l}</small>${f?f.n:'Por elegir'}</span></button>`}).join('');
+  $$('#slots .slot').forEach(b=>b.onclick=()=>{cur.active=+b.dataset.i;renderSlots()});
+  const p=cur.promo&&PROMOS.find(p=>p.id===cur.promo);
+  $('#slotHint').textContent=p?`Armando tu ${p.t}: elige un sabor por espacio.`:'Cada cantidad trae sus fórmulas. Elige una por espacio.';
+}
+function chip(f){return `<button class="chip" style="--c:${f.c}" data-id="${f.id}" ${f.off?'disabled':''}><span class="dot"></span>${f.n}${f.h?`<span class="fl" aria-label="picor ${f.h} de 5">${'<svg width="12" height="12"><use href="#flame"/></svg>'.repeat(f.h)}</span>`:''}</button>`}
+function renderChips(){
+  $('#mild').innerHTML=F.filter(f=>!f.h).map(chip).join('');
+  $('#hot').innerHTML=F.filter(f=>f.h).map(chip).join('');
+  $$('.chip').forEach(b=>{b.classList.toggle('on',cur.slots.includes(b.dataset.id));b.onclick=()=>pick(b.dataset.id)});
+}
+function updateAdd(){
+  const done=cur.slots.every(Boolean);
+  $('#add').setAttribute('aria-disabled',!done);
+  $('#addP').textContent='S/ '+curPrice();
+  const left=cur.slots.filter(s=>!s).length;
+  $('#hint').textContent=done?'':`Te falta${left>1?'n':''} ${left} fórmula${left>1?'s':''}.`;
+}
+function setTag(f,label){
+  const tag=$('#ftag');
+  if(!f){$('#fk').textContent='Laboratorio';$('#fn').textContent='Elige tu fórmula';$('#fd').textContent='Toca una fórmula y mira cómo bañamos tus alitas.';$('#fh').innerHTML=''}
+  else{$('#fk').textContent=label||'Fórmula';$('#fn').textContent=f.n;$('#fd').textContent=f.d;$('#fh').innerHTML=f.h?'<svg width="16" height="16"><use href="#flame"/></svg>'.repeat(f.h):''}
+  const n=$('#fn');n.classList.remove('pop');void n.offsetWidth;n.classList.add('pop');
+}
+
+/* ---------- bañar: el muñeco inclina el frasco y la fórmula cae ---------- */
+let pouring=[];
+function burst(el,n=6){
+  if(STATIC||!el)return;const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+  for(let i=0;i<n;i++){const a=i/n*Math.PI*2+Math.random()*.5,d=34+Math.random()*26;
+    const s=document.createElementNS(NS,'svg');s.setAttribute('class','burst');s.innerHTML='<use href="#i-spark"/>';
+    s.style.left=cx+'px';s.style.top=cy+'px';if(i%2)s.style.color='var(--red)';document.body.append(s);
+    s.animate([{transform:'translate(0,0) scale(.2) rotate(0)',opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(1) rotate(90deg)`,opacity:1,offset:.6},{transform:`translate(${Math.cos(a)*d*1.2}px,${Math.sin(a)*d*1.2}px) scale(.4) rotate(140deg)`,opacity:0}],{duration:650,easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish=()=>s.remove()}
+}
+function pick(id){
+  const f=FB[id];if(!f||f.off)return;
+  burst(document.querySelector(`.chip[data-id="${id}"]`));
+  const i=cur.active;cur.slots[i]=id;
+  const defs=slotDefs();
+  setTag(f,defs[i].l);
+  document.documentElement.style.setProperty('--sauce',f.c);
+  const targets=defs[i].k==='dip'?[]:wingEls.filter(w=>w.slot===i);
+  pour(f.c,targets,defs[i].k==='dip');
+  const next=cur.slots.findIndex(s=>!s);cur.active=next<0?i:next;
+  renderSlots();renderChips();updateAdd();
+}
+/* la salsa baja como una cortina sobre cada pieza (recortada a su forma) y deja brillo y una gota */
+function coatWing(w,c,anim,delay=0,k=0){
+  w.curtain.setAttribute('fill',c);w.curtain.setAttribute('opacity',.97);w.drip.setAttribute('fill',c);
+  if(!anim){w.gloss.setAttribute('opacity',.85);w.drip.setAttribute('opacity',k%3?0:1);return}
+  w.curtain.animate([{transform:'translateY(-62px)'},{transform:'translateY(0)'}],{duration:560,delay,easing:'cubic-bezier(.3,.7,.4,1)',fill:'backwards'});
+  w.gloss.animate([{opacity:0},{opacity:.85}],{duration:400,delay:delay+360,fill:'forwards'});
+  w.drip.setAttribute('opacity',0);
+  if(k%3===0)w.drip.animate([{opacity:1,transform:'scaleY(0)'},{opacity:1,transform:'scaleY(1)'}],{duration:700,delay:delay+440,easing:'cubic-bezier(.3,1.4,.5,1)',fill:'forwards'});
+  w.inner.animate([{transform:'none'},{transform:'translateY(3px) scale(1.05,.93)'},{transform:'none'}],{duration:440,delay,easing:'cubic-bezier(.3,1.5,.5,1)'});
+}
+/* geometría del vertido: el frasco gira en el puño (pivote) y el muñeco se inclina desde los pies */
+const PIV=[284,160],CHO=[190,452],toStage=p=>[p[0]*.9-44,p[1]*.9+248],LIFT=170;
+const rot=(p,c,deg)=>{const r=deg*Math.PI/180,x=p[0]-c[0],y=p[1]-c[1];return[c[0]+x*Math.cos(r)-y*Math.sin(r),c[1]+x*Math.sin(r)+y*Math.cos(r)]};
+const qpt=(a,b,c,t)=>[(1-t)*(1-t)*a[0]+2*(1-t)*t*b[0]+t*t*c[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*b[1]+t*t*c[1]];
+const f1=n=>n.toFixed(1);
+function pour(color,targets,isDip){
+  if(STATIC){targets.forEach((w,k)=>coatWing(w,color,false,0,k));if(isDip)$('#dipSauce').setAttribute('fill',color);return}
+  pouring.forEach(a=>a.cancel());pouring=[];
+  let end;
+  if(isDip)end=[568,414];
+  else{const xs=targets.map(w=>w.x);end=[(Math.min(...xs)+Math.max(...xs))/2,Math.min(...targets.map(w=>w.y))-12]}
+  // más lejos la canasta → frasco más horizontal
+  const L=0,A=Math.max(105,Math.min(135,128-(end[0]-400)*.12));
+  const t0=rot(rot([PIV[0],PIV[1]-TIPL],PIV,A),CHO,L),tip=toStage([t0[0],t0[1]-LIFT]);
+  const ang=(A+L)*Math.PI/180,dir=[Math.sin(ang),-Math.cos(ang)];
+  let cp=[end[0],Math.min(end[1]-26,tip[1]+(end[0]-tip[0])*dir[1]/Math.max(.2,dir[0]))];
+  if(end[0]<tip[0]+24)cp=[tip[0]+dir[0]*40,tip[1]+dir[1]*40];
+  const stream=$('#stream');
+  stream.setAttribute('d',`M${f1(tip[0])} ${f1(tip[1])}Q${f1(cp[0])} ${f1(cp[1])} ${f1(end[0])} ${f1(end[1])}`);
+  const D=1600,add=a=>pouring.push(a);
+  add($('#bottle').animate([
+    {transform:'translateY(0) rotate(0deg)'},
+    {transform:`translateY(${-LIFT*.7}px) rotate(-22deg)`,offset:.12,easing:'cubic-bezier(.4,0,.2,1)'},
+    {transform:`translateY(${-LIFT}px) rotate(${A+12}deg)`,offset:.3,easing:'cubic-bezier(.3,1.2,.5,1)'},
+    {transform:`translateY(${-LIFT}px) rotate(${A-5}deg)`,offset:.38},
+    {transform:`translateY(${-LIFT}px) rotate(${A}deg)`,offset:.46},
+    {transform:`translateY(${-LIFT}px) rotate(${A}deg)`,offset:.72,easing:'cubic-bezier(.5,0,.5,1)'},
+    {transform:`translateY(${-LIFT*.5}px) rotate(-10deg)`,offset:.88,easing:'cubic-bezier(.5,0,.7,1)'},
+    {transform:'translateY(6px) rotate(0deg) scale(1.04,.96)',offset:.95},
+    {transform:'translateY(0) rotate(0deg)'}],{duration:D}));
+  add($('#fshadow').animate([{transform:'none',opacity:.12},{transform:'scale(.55)',opacity:.05,offset:.3},{transform:'scale(.55)',opacity:.05,offset:.72},{transform:'none',opacity:.12,offset:.95},{transform:'none',opacity:.12}],{duration:D}));
+  // agita el matraz mientras cae la fórmula
+  add($('#squeeze').animate([{transform:'none'},{transform:'none',offset:.42},{transform:'rotate(7deg)',offset:.48},{transform:'rotate(-6deg)',offset:.55},{transform:'rotate(6deg)',offset:.62},{transform:'none',offset:.7},{transform:'none'}],{duration:D}));
+  add($('#chefBob').animate([{transform:'none'},{transform:'rotate(-3deg)',offset:.12},{transform:`rotate(${L+2}deg) translateY(-10px)`,offset:.3,easing:'cubic-bezier(.3,1.2,.5,1)'},{transform:`rotate(${L}deg)`,offset:.42},{transform:`rotate(${L}deg)`,offset:.72},{transform:'rotate(-2deg)',offset:.88},{transform:'none'}],{duration:D}));
+  add(stream.animate([{strokeDashoffset:1},{strokeDashoffset:1,offset:.38},{strokeDashoffset:0,offset:.46},{strokeDashoffset:0,offset:.7},{strokeDashoffset:-1,offset:.8},{strokeDashoffset:-1}],{duration:D}));
+  // gotas que bajan por el chorro y salpican al caer
+  const dg=$('#drops');dg.textContent='';
+  const pts=[0,.2,.4,.6,.8,1].map(t=>qpt(tip,cp,end,t));
+  for(let i=0;i<5;i++){const c=svgEl('circle',{r:3.5+(i%2),fill:color,opacity:0});dg.append(c);
+    add(c.animate(pts.map((p,j)=>({transform:`translate(${f1(p[0])}px,${f1(p[1])}px)`,opacity:j===0||j===pts.length-1?0:1})),{duration:340,delay:D*.42+i*90,easing:'cubic-bezier(.5,0,1,1)'}))}
+  for(let i=0;i<8;i++){const a=(-165+i*20)*Math.PI/180,r=16+(i%3)*8;
+    const c=svgEl('circle',{cx:f1(end[0]),cy:f1(end[1]),r:2.5+(i%2)*1.5,fill:color,opacity:0});dg.append(c);
+    add(c.animate([{opacity:1,transform:'translate(0,0)'},{opacity:1,transform:`translate(${f1(Math.cos(a)*r)}px,${f1(Math.sin(a)*r)}px)`,offset:.5},{opacity:0,transform:`translate(${f1(Math.cos(a)*r*1.4)}px,${f1(Math.sin(a)*r+18)}px)`}],{duration:560,delay:D*.45+(i%2)*160,easing:'cubic-bezier(.2,.7,.4,1)'}))}
+  // la cortina de salsa avanza desde donde cae el chorro
+  targets.forEach((w,k)=>coatWing(w,color,true,D*.43+Math.abs(w.x-end[0])*2.6+Math.max(0,w.y-end[1])*1.6,k));
+  if(isDip)setTimeout(()=>$('#dipSauce').setAttribute('fill',color),D*.48);
+}
+function dropWings(){
+  const st=Math.min(70,720/wingEls.length);
+  wingEls.forEach((w,i)=>w.inner.animate([{transform:'translateY(-150px) rotate(-40deg)',opacity:0},{transform:'translateY(5px) rotate(5deg)',opacity:1,offset:.72},{transform:'none',opacity:1}],{duration:560,delay:i*st,easing:'cubic-bezier(.3,0,.4,1)',fill:'backwards'}));
+  fryGs.forEach(g=>g.animate([{transform:'translateY(70px)'},{transform:'translateY(-4px)',offset:.7},{transform:'none'}],{duration:620,easing:'cubic-bezier(.3,1.2,.5,1)'}));
+}
+
+/* ---------- agregar ---------- */
+$('#add').onclick=()=>{
+  if(!cur.slots.every(Boolean)){const s=$('#slots');s.classList.remove('bad');void s.offsetWidth;s.classList.add('bad');return}
+  const defs=slotDefs();
+  let label,detail;
+  if(cur.promo){const p=PROMOS.find(p=>p.id===cur.promo);label=p.t;detail=defs.map((d,i)=>`${d.l}: ${FB[cur.slots[i]].n}`).join(' · ')}
+  else{const r=CARTA[cur.kind][cur.idx];label=`${r.n} ${cur.kind==='alitas'?'alitas':'boneless'} con papas`;detail='Fórmulas: '+cur.slots.map(s=>FB[s].n).join(' + ')}
+  addLine({label,detail,p:curPrice()});burst($('#add'),8);
+  if(!STATIC)$('#basket').animate([{transform:'none'},{transform:'translateY(8px) scale(1.02,.96)',offset:.2},{transform:'translateY(-26px)',offset:.5},{transform:'none'}],{duration:600,easing:'cubic-bezier(.3,1.2,.5,1)'});
+  setTimeout(()=>{resetLoad();setTag(null)},STATIC?0:620);
+};
+function addLine(l){
+  const key=l.label+'|'+l.detail;const ex=order.find(o=>o.key===key);
+  if(ex)ex.q++;else order.push({...l,key,q:1});
+  saveOrder();const c=$('#cnt');c.animate([{transform:'scale(1.7)'},{transform:'scale(1)'}],{duration:500,easing:'cubic-bezier(.3,1.6,.5,1)'});
+}
+const money=n=>'S/ '+n;
+function saveOrder(){
+  store.set('rufino.order',order);
+  const n=order.reduce((a,o)=>a+o.q,0),t=order.reduce((a,o)=>a+o.q*o.p,0);
+  $('#cnt').textContent=n;$('#tot').textContent=money(t);$('#sumT').textContent=money(t);
+  $('#bar').classList.toggle('show',n>0);
+  renderLines();
+}
+function renderLines(){
+  $('#lines').innerHTML=order.map((o,i)=>`<li class="line" data-i="${i}"><div><b>${o.label}</b><span>${o.detail}</span><span>S/ ${o.p} c/u</span></div><div class="qty"><button class="tap" data-d="-1" aria-label="Quitar uno">−</button><output>${o.q}</output><button class="tap" data-d="1" aria-label="Agregar uno">+</button></div></li>`).join('');
+  $$('#lines .qty button').forEach(b=>b.onclick=()=>{
+    const li=b.closest('.line'),i=+li.dataset.i;order[i].q+=+b.dataset.d;
+    if(order[i].q<=0){li.classList.add('out');setTimeout(()=>{order.splice(i,1);saveOrder();if(!order.length)closeSheet()},STATIC?0:340)}else saveOrder();
+  });
+}
+
+/* ---------- promos ---------- */
+function renderPromos(){
+  let h=PROMOS.map(p=>`<button class="promo tap" data-p="${p.id}"><img src="assets/img/${p.img}.webp" width="512" height="640" loading="lazy" alt=""><div class="b"><div class="t">${p.t}</div><div style="font-weight:700;font-size:13px">${p.sub}</div><div class="pr"><svg aria-hidden="true"><use href="#i-pct"/></svg><small>S/</small>${p.p}</div><ul>${p.items.map(x=>`<li>${x}</li>`).join('')}</ul>${p.note?`<p class="note">${p.note}</p>`:''}<span class="go">Elegir sabores →</span></div></button>`).join('');
+  if(LIMA_NOW<=HALLO.until){
+    h+=`<div class="promo"><img src="assets/img/${HALLO.img}.webp" width="512" height="640" loading="lazy" alt="Fachada de Rufino Lab en Halloween"><div class="b"><div class="t">Hallowings</div><div style="font-weight:700;font-size:13px">Del 19 al 31 de octubre</div><div class="hallo">${HALLO.combos.map(c=>`<button class="tap" data-h="${c.id}"><span>${c.d}</span><b>S/ ${c.p}</b></button>`).join('')}</div><p class="note">Los sabores se coordinan por WhatsApp.</p></div></div>`;
+  }
+  $('#plist').innerHTML=h;
+  $$('[data-p]').forEach(b=>b.onclick=()=>{cur.promo=b.dataset.p;renderRows();resetLoad();setTag(null);smoothTo($('#lab'))});
+  $$('[data-h]').forEach(b=>b.onclick=()=>{const c=HALLO.combos.find(c=>c.id===b.dataset.h);addLine({label:c.t,detail:c.d+' · sabores por coordinar',p:c.p});b.animate([{transform:'scale(.95)'},{transform:'scale(1)'}],{duration:400,easing:'cubic-bezier(.3,1.6,.5,1)'})});
+}
+function smoothTo(el){const y=el.getBoundingClientRect().top+scrollY;if(STATIC){scrollTo(0,y);return}const s=scrollY,t0=performance.now(),d=600;const step=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);scrollTo(0,s+(y-s)*e);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+
+/* ---------- selector alitas / boneless ---------- */
+$$('#seg button').forEach(b=>b.onclick=()=>{
+  cur.kind=b.dataset.v;cur.promo=null;$('#seg').dataset.v=cur.kind;
+  $$('#seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  renderRows();resetLoad(true);setTag(null);
+});
+
+/* ---------- hoja de pedido ---------- */
+let closeT;
+function openSheet(){const sh=$('#sheet');sh.classList.remove('closing');sh.hidden=false;document.body.style.overflow='hidden';requestAnimationFrame(()=>requestAnimationFrame(()=>sh.classList.add('open')))}
+function closeSheet(){const sh=$('#sheet');if(sh.hidden)return;sh.classList.add('closing');sh.classList.remove('open');document.body.style.overflow='';clearTimeout(closeT);closeT=setTimeout(()=>{sh.hidden=true;sh.classList.remove('closing')},STATIC?0:360)}
+$('#sheet').addEventListener('click',e=>{if(e.target.id==='sheet')closeSheet()});
+$('#openOrder').onclick=openSheet;$('#closeOrder').onclick=closeSheet;
+function mini(id,cb){$$(`#${id} button`).forEach(b=>b.onclick=e=>{e.preventDefault();$(`#${id}`).dataset.i=b.dataset.i;$$(`#${id} button`).forEach(x=>x.setAttribute('aria-pressed',x===b));cb&&cb(+b.dataset.i)})}
+mini('modo',i=>{$('#dirL').hidden=i===1;$('#refL').hidden=i===1;$('#sum2').textContent=i===1?'Recoges en Borgoño 396, Trujillo.':'El delivery se confirma por WhatsApp según tu zona.'});
+
+const WA='51906755197'; // Trujillo (por confirmar que tenga WhatsApp)
+$('#enviar').onclick=()=>{
+  const nombre=$('#nombre').value.trim(),modo=+$('#modo').dataset.i,dir=$('#dir').value.trim();
+  const miss=[!nombre&&'#nombre',modo===0&&!dir&&'#dir'].filter(Boolean);
+  if(miss.length){miss.forEach(s=>{const e=$(s);e.classList.remove('bad');void e.offsetWidth;e.classList.add('bad');e.style.borderColor='var(--red)'});$(miss[0]).focus();return}
+  const t=order.reduce((a,o)=>a+o.q*o.p,0);
+  let m=`Hola Rufino Lab, quiero hacer un pedido:\n\n`+order.map(o=>`- ${o.q}x ${o.label} — S/ ${o.q*o.p}\n    ${o.detail}`).join('\n')+`\n\nTotal: S/ ${t}`;
+  m+=modo===0?` + delivery\n¿Cuánto es el delivery a mi zona?\n\nModalidad: Delivery\nNombre: ${nombre}\nDirección: ${dir}`+($('#ref').value.trim()?`\nReferencia: ${$('#ref').value.trim()}`:''):`\n\nModalidad: Recojo en el local (Borgoño 396)\nNombre: ${nombre}`;
+  const url=`https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+  if(DRY){window.__lastOrderUrl=url;console.log('[dry]',url)}
+  seal();
+  setTimeout(()=>{if(!DRY)location.href=url},STATIC?0:900);
+};
+/* sello final: el átomo con la R de su destacada cierra el pedido */
+function seal(){
+  if(STATIC)return;
+  const s=document.createElementNS(NS,'svg');s.setAttribute('viewBox','-60 -60 120 120');s.setAttribute('class','seal');
+  s.innerHTML=`<circle r="54" fill="#E10A14"/><g fill="none" stroke="#fff" stroke-width="4"><ellipse rx="40" ry="14"/><ellipse rx="40" ry="14" transform="rotate(60)"/><ellipse rx="40" ry="14" transform="rotate(-60)"/></g><text y="13" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="700" font-size="40" fill="#fff">R</text>`;
+  document.body.append(s);
+  s.animate([{transform:'scale(2.4) rotate(-40deg)',opacity:0},{transform:'scale(.9) rotate(6deg)',opacity:1,offset:.45},{transform:'scale(1) rotate(0)',opacity:1,offset:.7},{transform:'scale(1)',opacity:0}],{duration:1100,easing:'cubic-bezier(.3,1.3,.5,1)',fill:'forwards'}).onfinish=()=>s.remove();
+}
+
+/* ---------- intro (~1.3 s, no bloquea) ---------- */
+let introAnims=[];
+function intro(){
+  introAnims.forEach(a=>a.cancel());introAnims=[];
+  const add=(el,k,o)=>{if(!el)return;const a=el.animate(k,Object.assign({fill:'both'},o));introAnims.push(a);return a};
+  add($('#marca'),[{opacity:0,transform:'translateY(10px) scale(.9)'},{opacity:1,transform:'none'}],{duration:600,easing:'cubic-bezier(.3,1.3,.5,1)'});
+  add($('#chef'),[{transform:'translateX(-260px)'},{transform:'translateX(8px)',offset:.75},{transform:'none'}],{duration:820,delay:120,easing:'cubic-bezier(.25,.8,.35,1)'});
+  add($('#chefBob'),[{transform:'none'},{transform:'translateY(-14px)'},{transform:'none'},{transform:'translateY(-14px)'},{transform:'none'}],{duration:760,delay:120,easing:'ease-in-out',fill:'none'});
+  const st=Math.min(80,720/wingEls.length);
+  wingEls.forEach((w,i)=>add(w.inner,[{transform:'translateY(-150px) rotate(-30deg)',opacity:0},{transform:'translateY(6px) rotate(4deg)',opacity:1,offset:.7},{transform:'none',opacity:1}],{duration:560,delay:560+i*st,easing:'cubic-bezier(.3,0,.4,1)'}));
+  fryGs.forEach(g=>add(g,[{transform:'translateY(70px)'},{transform:'none'}],{duration:600,delay:480,easing:'cubic-bezier(.3,1.2,.5,1)'}));
+  add($('#ftag'),[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:400,delay:700,easing:'cubic-bezier(.2,.9,.3,1)'});
+  if(Q.has('t')){const T=parseFloat(Q.get('t'))*1000;introAnims.forEach(a=>{a.pause();a.currentTime=T})}
+}
+/* después de la intro, el muñeco sigue en movimiento: camina en su sitio y menea el frasco */
+/* el personaje camina en su sitio: piernas alternadas, brazo de atrás, parpadea y burbujea */
+function alive(root){
+  const A=(sel,o,k,opt)=>{const e=root.querySelector(sel);if(e){e.style.transformOrigin=o;e.animate(k,Object.assign({iterations:Infinity,easing:'ease-in-out'},opt))}};
+  A('.leg-b','124px 356px',[{transform:'rotate(10deg)'},{transform:'rotate(-12deg)'},{transform:'rotate(10deg)'}],{duration:1500});
+  A('.leg-f','174px 356px',[{transform:'rotate(-12deg)'},{transform:'rotate(10deg)'},{transform:'rotate(-12deg)'}],{duration:1500});
+  A('.armB','94px 216px',[{transform:'rotate(-10deg)'},{transform:'rotate(12deg)'},{transform:'rotate(-10deg)'}],{duration:1500});
+  root.querySelectorAll('.pupil').forEach(p=>{p.style.transformBox='fill-box';p.style.transformOrigin='center';
+    p.animate([{transform:'none'},{transform:'none',offset:.92},{transform:'scaleY(.1)',offset:.95},{transform:'none'}],{duration:3800,iterations:Infinity})});
+  root.querySelectorAll('.fizz circle').forEach((c,i)=>c.animate([{transform:'translateY(0)',opacity:0},{opacity:.9,offset:.2},{transform:'translateY(-40px)',opacity:0}],{duration:1700+i*400,delay:i*500,iterations:Infinity,easing:'ease-in'}));
+}
+function breathe(){
+  if(STATIC||Q.has('t'))return;
+  alive($('#stageSvg #chefBob'));
+  $('#chefBob').animate([{transform:'translateY(0)'},{transform:'translateY(-5px) rotate(-1.2deg)'},{transform:'translateY(0)'},{transform:'translateY(-5px) rotate(1deg)'},{transform:'translateY(0)'}],{duration:1500,iterations:Infinity,easing:'ease-in-out',composite:'add'});
+  $('#bottle').animate([{transform:'rotate(-6deg)'},{transform:'rotate(7deg)'},{transform:'rotate(-6deg)'}],{duration:1500,iterations:Infinity,easing:'ease-in-out',composite:'add'});
+  $$('#bubbles circle').forEach((c,i)=>c.animate([{transform:'translateY(0)',opacity:0},{opacity:1,offset:.2},{transform:'translateY(-34px)',opacity:0}],{duration:1400+i*300,delay:i*450,iterations:Infinity,easing:'ease-in'}));
+}
+
+/* ---------- presentación: "Empezar a formular" abre la puerta del lab ---------- */
+function door(){
+  if(STATIC||DRY||Q.has('t')||Q.has('nointro'))return false;
+  const el=$('#intro');el.hidden=false;document.documentElement.style.overflow='hidden';
+  const A=(s,k,o)=>$(s).animate(k,Object.assign({fill:'both'},o));
+  A('#iatom',[{transform:'scale(.2) rotate(-120deg)',opacity:0},{transform:'none',opacity:.13}],{duration:1200,easing:'cubic-bezier(.2,1.2,.4,1)'});
+  A('#ilogo',[{opacity:0,transform:'scale(.6) rotate(-6deg)'},{opacity:1,transform:'scale(1.06) rotate(1deg)',offset:.6},{transform:'none',opacity:1}],{duration:900,delay:150,easing:'cubic-bezier(.3,1.2,.5,1)'});
+  A('#ik',[{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:500,delay:700,easing:'cubic-bezier(.2,.9,.3,1)'});
+  A('#iq',[{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:500,delay:800,easing:'cubic-bezier(.2,.9,.3,1)'});
+  A('#start',[{transform:'scale(0)'},{transform:'scale(1.12)',offset:.6},{transform:'none'}],{duration:700,delay:950,easing:'cubic-bezier(.3,1.3,.5,1)'});
+  A('#imascot',[{transform:'translateX(-90vw)'},{transform:'translateX(10px)',offset:.8},{transform:'none'}],{duration:1100,delay:150,easing:'cubic-bezier(.25,.8,.35,1)'});
+  $('#imBob').animate([{transform:'none'},{transform:'translateY(-16px)'},{transform:'none'}],{duration:270,iterations:4,delay:150,easing:'ease-in-out'});
+  const idle=[];
+  setTimeout(()=>{
+    alive($('#imascot'));
+    idle.push($('#iatom').animate([{rotate:'0deg'},{rotate:'360deg'}],{duration:24000,iterations:Infinity}));
+    idle.push($('#imBob').animate([{transform:'none'},{transform:'translateY(-6px) rotate(-1.5deg)'},{transform:'none'}],{duration:1400,iterations:Infinity,easing:'ease-in-out'}));
+    idle.push($('#imBottle').animate([{transform:'rotate(-8deg)'},{transform:'rotate(10deg)'},{transform:'rotate(-8deg)'}],{duration:1400,iterations:Infinity,easing:'ease-in-out'}));
+    idle.push($('#start').animate([{scale:1},{scale:1.05},{scale:1}],{duration:1600,iterations:Infinity,easing:'ease-in-out'}));
+  },1300);
+  let gone=false;
+  const go=()=>{
+    if(gone)return;gone=true;removeEventListener('keydown',key);
+    // un saltito y la puerta sube con su borde de cuadros
+    $('#imBob').animate([{transform:'none'},{transform:'translateY(-40px) rotate(5deg)',offset:.4},{transform:'none'}],{duration:450,easing:'cubic-bezier(.3,1.3,.5,1)'});
+    const a=el.animate([{transform:'none'},{transform:'translateY(-104%)'}],{duration:850,delay:200,easing:'cubic-bezier(.7,0,.2,1)',fill:'forwards'});
+    setTimeout(()=>{document.documentElement.style.overflow='';scrollTo(0,0);intro();setTimeout(breathe,1400)},480);
+    a.onfinish=()=>{idle.forEach(x=>x.cancel());el.remove()};
+  };
+  const key=e=>{if(e.key==='Enter'||e.key==='Escape'||e.key===' '){e.preventDefault();go()}};
+  addEventListener('keydown',key);
+  $('#start').onclick=go;
+  return true;
+}
+
+renderRows();renderPromos();
+cur.slots=slotDefs().map(()=>null);{const sp=pileSpec();buildWings(sp.kind,sp.N)}assignWings();renderSlots();renderChips();updateAdd();saveOrder();
+if(!STATIC&&!door()){intro();setTimeout(breathe,1400)}
+addEventListener('keydown',e=>{if((e.key==='r'||e.key==='R')&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){scrollTo(0,0);intro()}});
+</script>
+</body>
+</html>
